@@ -1,0 +1,33 @@
+syntax="proto3";
+package pb;
+option java_package = "pb";
+option java_multiple_files=true;
+
+message blank {
+}
+
+message UnidadeId {
+  uint64 id = 1;
+}
+
+message Unidade {
+  uint64 id = 1;
+  string nome = 2;
+  string abreviacao = 3;
+}
+
+message CriarUnidadeRequest {
+  string nome = 1;
+  string abreviacao = 2;
+}
+
+message ListaUnidades {
+  repeated Unidade unidade = 1;
+}
+
+service UnidadeService {
+  rpc CreateUnidade(CriarUnidadeRequest) returns (UnidadeId) {}
+  rpc GetUnidade(UnidadeId) returns (Unidade) {}
+  rpc DeleteUnidade(UnidadeId) returns (blank) {}
+  rpc ListUnidade(blank) returns (ListaUnidades) {}
+}
