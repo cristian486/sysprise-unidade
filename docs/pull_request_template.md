@@ -1,6 +1,6 @@
 # Descrição
 
-Por favor inclua o sumário das mudanças realizadas e o respectivo issue. Além dis informe qualquer motivação relevante e contexto. Liste todas as dependências necessárias para essa mudanças.
+Por favor inclua o sumário das mudanças realizadas e o respectivo issue. Além disso informe qualquer motivação relevante e contexto. Liste todas as dependências necessárias para essa mudanças.
 
 Fixes # (issue)
 
@@ -29,7 +29,7 @@ Por favor descreva os testes executados para verificar as mudanças. Forneça in
 # Checklist:
 
 - [ ] Meu código segue as guidelines do projeto
-- [ ] Eu realizar uma avaliação do meu código
+- [ ] Eu realizei uma avaliação do meu código
 - [ ] Eu escrevi comentários no código, particularmente nas partes mais complicadas de entender
 - [ ] Eu realizei as devidas alterações na documentação
 - [ ] Minhas alterações não geram novos alertas
