@@ -1,0 +1,12 @@
+syntax = "proto3";
+package pb;
+option java_multiple_files = true;
+import "unidade.proto";
+
+message ProdutoExiste {
+  bool existe = 1;
+}
+
+service ProdutoService {
+  rpc VerifyIfExistsProductsAssociatedWithUnit(UnidadeId) returns (ProdutoExiste) {}
+}

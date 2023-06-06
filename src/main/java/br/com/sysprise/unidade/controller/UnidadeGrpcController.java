@@ -1,5 +1,6 @@
-package br.com.sysprise.unidade.service;
+package br.com.sysprise.unidade.controller;
 
+import br.com.sysprise.unidade.service.UnidadeService;
 import io.grpc.stub.StreamObserver;
 import lombok.AllArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @GrpcService
 @AllArgsConstructor
-public class UnidadeRpcService extends UnidadeServiceGrpc.UnidadeServiceImplBase {
+public class UnidadeGrpcController extends UnidadeServiceGrpc.UnidadeServiceImplBase {
 
     private final UnidadeService unidadeService;
 

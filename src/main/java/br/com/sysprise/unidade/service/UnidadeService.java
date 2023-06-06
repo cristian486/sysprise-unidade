@@ -4,18 +4,24 @@ package br.com.sysprise.unidade.service;
 import br.com.sysprise.unidade.model.*;
 import br.com.sysprise.unidade.repository.UnidadeRepository;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
+import net.devh.boot.grpc.client.inject.GrpcClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import pb.ProdutoServiceGrpc;
+import pb.UnidadeId;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class UnidadeService {
 
-    private final UnidadeRepository unidadeRepository;
+    @Autowired
+    private UnidadeRepository unidadeRepository;
+
+    @GrpcClient("produto")
+    private ProdutoServiceGrpc.ProdutoServiceBlockingStub produtoStub;
 
     public Unidade findUnidadeById(Long id) {
         return unidadeRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("A unidade requisitada não foi encontrada!"));
@@ -54,9 +60,9 @@ public class UnidadeService {
 
     public void deletar(Long id) {
         Unidade unidade = this.findUnidadeById(id);
-        //Boolean haProdutosVinculados = unidadeRepository.haProdutosVinculadosUnidade(unidade.getId());
-        Boolean haProdutosVinculados = Boolean.TRUE;
-        if(haProdutosVinculados) throw new RuntimeException("Unidade não pode ser deletada pois há produtos vinculados a ela");
+        boolean haProdutosVinculados = produtoStub.verifyIfExistsProductsAssociatedWithUnit(UnidadeId.newBuilder().setId(id).build()).getExiste();
+        if (haProdutosVinculados)
+            throw new RuntimeException("Unidade não pode ser deletada pois há produtos vinculados a ela");
         unidadeRepository.delete(unidade);
     }
 }
